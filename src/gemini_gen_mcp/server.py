@@ -98,7 +98,7 @@ async def text_to_audio(
     model: str = "gemini-2.0-flash-exp",
     voice: Optional[str] = None,
 ) -> str:
-    """Generate audio from text using Gemini 2.5 Flash Preview TTS model.
+    """Generate audio from text using Gemini Flash TTS model.
     
     Args:
         text: Text to convert to speech

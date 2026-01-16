@@ -1,9 +1,3 @@
-# Example configuration for Claude Desktop
-# Save this as claude_desktop_config.json in the appropriate location:
-# - macOS: ~/Library/Application Support/Claude/
-# - Windows: %APPDATA%\Claude\
-# - Linux: ~/.config/claude/
-
 {
   "mcpServers": {
     "gemini-gen": {

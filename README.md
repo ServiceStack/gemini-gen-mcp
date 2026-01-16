@@ -55,6 +55,8 @@ python -m gemini_gen_mcp.server
 
 ### Using with Claude Desktop
 
+See [CLAUDE_CONFIG.md](CLAUDE_CONFIG.md) for detailed instructions.
+
 Add this to your `claude_desktop_config.json`:
 
 ```json

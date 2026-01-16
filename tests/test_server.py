@@ -93,7 +93,7 @@ async def test_text_to_image_success_mock():
             mock_client.return_value = mock_instance
             
             result = await func("a beautiful sunset")
-            assert "Error" not in result or "Error:" not in result.split("\n")[0]
+            assert "Error" not in result
 
 
 @pytest.mark.asyncio
@@ -121,4 +121,4 @@ async def test_text_to_audio_success_mock():
             mock_client.return_value = mock_instance
             
             result = await func("Hello, world!")
-            assert "Error" not in result or "Error:" not in result.split("\n")[0]
+            assert "Error" not in result
