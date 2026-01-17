@@ -125,18 +125,18 @@ Generate audio/speech from text using Gemini's TTS models. Output is saved as WA
 
 **Available Voices:**
 
-| Voice | Style | Voice | Style | Voice | Style |
-|-------|-------|-------|-------|-------|-------|
-| Zephyr | Bright | Puck | Upbeat | Charon | Informative |
-| Kore | Firm | Fenrir | Excitable | Leda | Youthful |
-| Orus | Firm | Aoede | Breezy | Callirrhoe | Easy-going |
-| Autonoe | Bright | Enceladus | Breathy | Iapetus | Clear |
-| Umbriel | Easy-going | Algieba | Smooth | Despina | Smooth |
-| Erinome | Clear | Algenib | Gravelly | Rasalgethi | Informative |
-| Laomedeia | Upbeat | Achernar | Soft | Alnilam | Firm |
-| Schedar | Even | Gacrux | Mature | Pulcherrima | Forward |
-| Achird | Friendly | Zubenelgenubi | Casual | Vindemiatrix | Gentle |
-| Sadachbia | Lively | Sadaltager | Knowledgeable | Sulafat | Warm |
+| Voice     | Style      | Voice         | Style         | Voice        | Style       |
+|-----------|------------|---------------|---------------|--------------|-------------|
+| Zephyr    | Bright     | Puck          | Upbeat        | Charon       | Informative |
+| Kore      | Firm       | Fenrir        | Excitable     | Leda         | Youthful    |
+| Orus      | Firm       | Aoede         | Breezy        | Callirrhoe   | Easy-going  |
+| Autonoe   | Bright     | Enceladus     | Breathy       | Iapetus      | Clear       |
+| Umbriel   | Easy-going | Algieba       | Smooth        | Despina      | Smooth      |
+| Erinome   | Clear      | Algenib       | Gravelly      | Rasalgethi   | Informative |
+| Laomedeia | Upbeat     | Achernar      | Soft          | Alnilam      | Firm        |
+| Schedar   | Even       | Gacrux        | Mature        | Pulcherrima  | Forward     |
+| Achird    | Friendly   | Zubenelgenubi | Casual        | Vindemiatrix | Gentle      |
+| Sadachbia | Lively     | Sadaltager    | Knowledgeable | Sulafat      | Warm        |
 
 **Example:**
 ```json
@@ -167,7 +167,9 @@ pip install -e .
 pip install pytest pytest-asyncio
 
 # Run tests
-pytest
+```bash
+# uv run pytest tests -v
+npm test
 ```
 
 ## License
