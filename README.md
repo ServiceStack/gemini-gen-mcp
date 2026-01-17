@@ -31,11 +31,25 @@ pip install -e .
 
 You need a Google Gemini API key to use this server. Get one from [Google AI Studio](https://aistudio.google.com/apikey).
 
-Set the API key as an environment variable:
+## Environment Variables
+
+| Variable | Required | Default | Description |
+|----------|----------|---------|-------------|
+| `GEMINI_API_KEY` | Yes | - | Your Google Gemini API key |
+| `GEMINI_DOWNLOAD_PATH` | No | `/tmp/gemini_gen_mcp` | Directory where generated files are saved |
+
+Set the environment variables:
 
 ```bash
 export GEMINI_API_KEY='your-api-key-here'
+export GEMINI_DOWNLOAD_PATH='/path/to/downloads'  # optional
 ```
+
+Generated files are organized by type and date:
+- Images: `$GEMINI_DOWNLOAD_PATH/images/YYYY-MM-DD/`
+- Audio: `$GEMINI_DOWNLOAD_PATH/audios/YYYY-MM-DD/`
+
+Each generated file includes a companion `.info.json` file with generation metadata.
 
 ## Usage
 
@@ -76,36 +90,60 @@ Add this to your `claude_desktop_config.json`:
 
 #### text_to_image
 
-Generate images from text descriptions.
+Generate images from text descriptions using Gemini's image generation models.
 
 **Parameters:**
 - `prompt` (string, required): Text description of the image to generate
-- `model` (string, optional): Gemini model to use (default: "gemini-2.0-flash-exp")
-- `num_images` (integer, optional): Number of images to generate, 1-4 (default: 1)
+- `model` (string, optional): Gemini model to use
+  - `gemini-2.5-flash-image` (default)
+  - `gemini-3-pro-image-preview`
+- `aspect_ratio` (string, optional): Aspect ratio for the generated image (default: "1:1")
+  - Supported: `1:1`, `2:3`, `3:2`, `3:4`, `4:3`, `4:5`, `5:4`, `9:16`, `16:9`, `21:9`
+- `temperature` (float, optional): Sampling temperature for image generation (default: 1.0)
+- `top_p` (float, optional): Nucleus sampling parameter (optional)
 
 **Example:**
 ```json
 {
   "prompt": "A serene mountain landscape at sunset with a lake",
-  "model": "gemini-2.0-flash-exp",
-  "num_images": 1
+  "model": "gemini-2.5-flash-image",
+  "aspect_ratio": "16:9",
+  "temperature": 1.0
 }
 ```
 
 #### text_to_audio
 
-Generate audio/speech from text.
+Generate audio/speech from text using Gemini's TTS models. Output is saved as WAV format.
 
 **Parameters:**
 - `text` (string, required): Text to convert to speech
-- `model` (string, optional): Gemini model to use (default: "gemini-2.0-flash-exp")
-- `voice` (string, optional): Voice to use for speech generation
+- `model` (string, optional): Gemini TTS model to use
+  - `gemini-2.5-flash-preview-tts` (default)
+  - `gemini-2.5-pro-preview-tts`
+- `voice` (string, optional): Voice to use for speech generation (default: "Kore")
+
+**Available Voices:**
+
+| Voice | Style | Voice | Style | Voice | Style |
+|-------|-------|-------|-------|-------|-------|
+| Zephyr | Bright | Puck | Upbeat | Charon | Informative |
+| Kore | Firm | Fenrir | Excitable | Leda | Youthful |
+| Orus | Firm | Aoede | Breezy | Callirrhoe | Easy-going |
+| Autonoe | Bright | Enceladus | Breathy | Iapetus | Clear |
+| Umbriel | Easy-going | Algieba | Smooth | Despina | Smooth |
+| Erinome | Clear | Algenib | Gravelly | Rasalgethi | Informative |
+| Laomedeia | Upbeat | Achernar | Soft | Alnilam | Firm |
+| Schedar | Even | Gacrux | Mature | Pulcherrima | Forward |
+| Achird | Friendly | Zubenelgenubi | Casual | Vindemiatrix | Gentle |
+| Sadachbia | Lively | Sadaltager | Knowledgeable | Sulafat | Warm |
 
 **Example:**
 ```json
 {
   "text": "Hello, this is a test of the Gemini text to speech system.",
-  "model": "gemini-2.0-flash-exp"
+  "model": "gemini-2.5-flash-preview-tts",
+  "voice": "Kore"
 }
 ```
 
