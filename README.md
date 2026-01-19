@@ -71,12 +71,13 @@ python -m gemini_gen_mcp.server
 
 See [CLAUDE_CONFIG.md](CLAUDE_CONFIG.md) for detailed instructions.
 
-Add this to your `claude_desktop_config.json`:
+Add this to your [llmspy.org MCP](https://llmspy.org) or `claude_desktop_config.json`:
 
 ```json
 {
   "mcpServers": {
     "gemini-gen": {
+      "description": "Enable Gemini Image (Nano Banana) and Audio TTS generation",
       "command": "gemini-gen-mcp",
       "env": {
         "GEMINI_API_KEY": "your-api-key-here"
@@ -84,6 +85,30 @@ Add this to your `claude_desktop_config.json`:
     }
   }
 }
+```
+
+### Development Server
+
+For development, you can run this server using `uv`:
+
+```json
+{
+  "mcpServers": {
+    {
+      "command": "uv",
+      "args": [
+        "run",
+        "--directory",
+        "/path/to/ServiceStack/gemini-gen-mcp",
+        "gemini-gen-mcp"
+      ],
+      "env": {
+        "GEMINI_API_KEY": "$GEMINI_API_KEY"
+      }
+    }
+  }
+}
+
 ```
 
 ### Available Tools
