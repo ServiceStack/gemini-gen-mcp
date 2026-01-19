@@ -214,12 +214,12 @@ async def text_to_image(
 
 
 @mcp.tool()
-async def text_to_audio(
+async def text_to_speech(
     text: Annotated[str, "Text to convert to speech"],
     model: AudioModels = AudioModels.GEMINI_2_5_FLASH_PREVIEW_TTS,
     voice: VoiceName = VoiceName.KORE,
 ) -> Audio:
-    """Generate audio from text using Gemini Flash TTS model."""
+    """Generate speech audio from text using Gemini Flash TTS model."""
 
     # Configure Gemini API
     # https://ai.google.dev/gemini-api/docs/speech-generation

@@ -40,9 +40,9 @@ async def test_text_to_image_missing_api_key():
 @pytest.mark.asyncio
 async def test_text_to_audio_missing_api_key():
     """Test text_to_audio raises ValueError when API key is missing."""
-    from src.gemini_gen_mcp.server import text_to_audio
+    from src.gemini_gen_mcp.server import text_to_speech
 
-    func = text_to_audio.fn
+    func = text_to_speech.fn
 
     with patch.dict(os.environ, {}, clear=True):
         with pytest.raises(ValueError, match="GEMINI_API_KEY"):
@@ -82,10 +82,10 @@ async def test_text_to_image_success_mock():
 @pytest.mark.asyncio
 async def test_text_to_audio_success_mock():
     """Test text_to_audio with mocked successful response."""
-    from src.gemini_gen_mcp.server import text_to_audio
+    from src.gemini_gen_mcp.server import text_to_speech
     from fastmcp.utilities.types import Audio
 
-    func = text_to_audio.fn
+    func = text_to_speech.fn
 
     # Create valid PCM data (silence) for WAV conversion
     pcm_data = b"\x00\x00" * 24000  # 1 second of silence at 24kHz
