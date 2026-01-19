@@ -71,7 +71,7 @@ python -m gemini_gen_mcp.server
 
 See [CLAUDE_CONFIG.md](CLAUDE_CONFIG.md) for detailed instructions.
 
-Add this to your [llmspy.org MCP](https://llmspy.org) or `claude_desktop_config.json`:
+Add this to your or `claude_desktop_config.json`:
 
 ```json
 {
@@ -86,6 +86,25 @@ Add this to your [llmspy.org MCP](https://llmspy.org) or `claude_desktop_config.
         "GEMINI_API_KEY": "$GEMINI_API_KEY"
       }
     }
+  }
+}
+```
+
+### Using in llms .py
+
+Or paste server configuration into [llms .py MCP Servers](https://llmspy.org/docs/extensions/fast_mcp):
+
+Name: `gemini-gen`
+
+```json
+{
+  "description": "Gemini Image and Audio TTS generation",
+  "command": "uvx",
+  "args": [
+    "gemini-gen-mcp"
+  ],
+  "env": {
+    "GEMINI_API_KEY": "$GEMINI_API_KEY"
   }
 }
 ```
