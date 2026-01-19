@@ -28,7 +28,7 @@ async def test_text_to_image_integration():
         assert isinstance(result, Image)
         assert result.data is not None
         assert len(result.data) > 0
-        assert result.format in ["png", "jpg", "jpeg"]
+        assert result._format in ["png", "jpg", "jpeg"]
         
         print(f"\nIntegration test success! Image generated, size: {len(result.data)} bytes")
         
