@@ -77,10 +77,13 @@ Add this to your [llmspy.org MCP](https://llmspy.org) or `claude_desktop_config.
 {
   "mcpServers": {
     "gemini-gen": {
-      "description": "Enable Gemini Image (Nano Banana) and Audio TTS generation",
-      "command": "gemini-gen-mcp",
+      "description": "Gemini Image and Audio TTS generation",
+      "command": "uvx",
+      "args": [
+        "gemini-gen-mcp"
+      ],
       "env": {
-        "GEMINI_API_KEY": "your-api-key-here"
+        "GEMINI_API_KEY": "$GEMINI_API_KEY"
       }
     }
   }
@@ -108,7 +111,6 @@ For development, you can run this server using `uv`:
     }
   }
 }
-
 ```
 
 ### Available Tools
