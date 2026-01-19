@@ -3,18 +3,23 @@ import pytest
 import time
 import signal
 import socket
+
+# Force IPv4 to avoid macOS hang with broken IPv6
+# IMPORTANT: Must be patched BEFORE importing google.genai
+# global fix to disable IPv6 on macOS:
+# $ sudo networksetup -setv6off Wi-Fi
+#
+# _orig_getaddrinfo = socket.getaddrinfo
+# def _patched_getaddrinfo(*args, **kwargs):
+#     responses = _orig_getaddrinfo(*args, **kwargs)
+#     return [res for res in responses if res[0] == socket.AF_INET]
+# socket.getaddrinfo = _patched_getaddrinfo
+
 from google import genai
 from google.genai import types
 
-# Force IPv4 to avoid macOS hang with broken IPv6
-orig_getaddrinfo = socket.getaddrinfo
-def patched_getaddrinfo(*args, **kwargs):
-    responses = orig_getaddrinfo(*args, **kwargs)
-    return [res for res in responses if res[0] == socket.AF_INET]
-socket.getaddrinfo = patched_getaddrinfo
-
 def handler(signum, frame):
-    raise TimeoutError("Test timed out after 30 seconds")
+    raise TimeoutError("Test timed out after 120 seconds")
 
 def get_api_key() -> str:
     """Get Gemini API key from environment."""
@@ -28,7 +33,7 @@ def test_genai_direct_image_gen():
     api_key = get_api_key()
     client = genai.Client(api_key=api_key,
         http_options={
-            'timeout': 30.0  # 30 seconds timeout
+            'timeout': 120000  # 120 seconds timeout (in milliseconds)
         })
     
     prompt = "A simple red cube on a white background"
@@ -38,7 +43,7 @@ def test_genai_direct_image_gen():
     
     # Set up alarm for timeout
     signal.signal(signal.SIGALRM, handler)
-    signal.alarm(30)
+    signal.alarm(120)
     
     try:
         response = client.models.generate_content(
