@@ -4,6 +4,7 @@ import os
 import base64
 import io
 import json
+import socket
 import time
 import wave
 
@@ -14,6 +15,7 @@ from google import genai
 from google.genai import types
 from fastmcp import FastMCP
 from fastmcp.utilities.types import Image, Audio
+
 
 # Initialize FastMCP server
 mcp = FastMCP("gemini-gen-mcp")
@@ -41,7 +43,9 @@ def get_api_key() -> str:
 
 def create_client() -> genai.Client:
     """Create and return a Gemini API client."""
-    return genai.Client(api_key=get_api_key())
+    return genai.Client(api_key=get_api_key(), http_options={
+            'timeout': 120000  # 120 seconds timeout (in milliseconds)
+        })
 
 
 class ImageModels(StrEnum):
